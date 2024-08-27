@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td {
+        border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <% for(let i = 0; i < result.length; i++) { %>
+    <table>
+        <tr>
+            <th>name</th>
+            <td><%= result[i].name %></td>
+        </tr>
+        <tr>
+            <th>house</th>
+            <td><%= result[i].house %></td>
+        </tr>
+        <tr>
+            <th>gender</th>
+            <td><%= result[i].gender %>Male</td>
+        </tr>
+        <tr>
+            <th>wizard</th>
+            <td><%= result[i].wizard %>true</td>
+        </tr>
+    </table>
+    <br>
+    <%}; %>
+</body>
+</html>

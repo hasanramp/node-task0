@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2</title>
+</head>
+<body>
+   <form action="/" method="post">
+        <input name="input" id="input" type="text" list="harryPotterCharacter" placeholder="Enter here">
+        <datalist id="harryPotterCharacter">
+            <option id="option0">Harry Potter</option>
+            <option id="option1">Hermoine Granger</option>
+            <option id="option2">Ronald Weasely</option>
+        </datalist>
+        <button type="submit">Submit</button>
+   </form> 
+   <p style="display: none;" id="data"><%= data %></p>
+   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+   <script>
+        /*
+            The Harry Potter data received from the server is in an invisible <p> tag.
+            hpData gets the data and JSON.parse converts it into an object which is {data: array[]}
+            the array has names of all the characters and spells
+        */
+        let hpData = JSON.parse(document.getElementById("data").innerHTML) 
+
+        // Returns the names which are superstrings of the input given by the user
+        function lookForSubstring(toSearchFrom, toSearch) {
+            let result = []
+            for (let i = 0; i < toSearchFrom.length; i++) {
+                if (toSearchFrom[i].toLowerCase().includes(toSearch)) {
+                    result.push(toSearchFrom[i])
+                }
+            }
+            return result;
+        }
+
+        // Doesn't work
+        function lookForCharacterMatches(toSearchFrom, toSearch) {
+            let advRes = new Map()
+            for (let i = 0; i < toSearchFrom.length; i++) {
+                for (let j = 0; j < toSearch.length; j++) {
+                    let char = toSearch[j]
+                    if (toSearchFrom[i].includes(char)) {
+                        if (advRes.get(toSearchFrom[i])) {
+                            let charMatches = advRes.get(toSearchFrom[i])
+                            advRes.set(toSearchFrom[i], charMatches + 1)
+
+                        }else {
+                            advRes.set(toSearchFrom[i], 1)
+                        }
+                    }
+                }
+            }
+            return advRes;
+        }
+	
+        
+        
+      
+        // Gets user input
+        let input = document.getElementById("input")
+        // The event listener is activated everytime the input value is changed and the function updateValue() is called
+        input.addEventListener("input", updateValue)
+
+        let names = []
+        names = hpData.data
+
+        function updateValue(e) {
+            // e.target.value is the string entered by the user. It is converted to lowercase using toLowerCase()
+            let value = e.target.value.toLowerCase();
+
+            // Looks for which Characters/spells match the input and updates the dropdown
+            let res = lookForSubstring(names, value)
+            if (res.length !== 0) {
+                for (let j = 0; j < 3; j++) {
+                    let option = document.getElementById(`option${j}`)
+                    option.innerHTML = res[j]
+                }
+            }else {
+                // Doesn't work
+                console.log('reached here')
+                res = lookForCharacterMatches(names, value)
+                let highest = 0
+                let character;
+                for (let [key, value] of res) {
+                    if (value > highest) {
+                        highest = value
+                        character = key
+                    }
+                    if (key == 'Draco Malfoy') {
+                        console.log(value)
+                    }
+                }
+                console.log(highest)
+                console.log(character)
+                document.getElementById("option0").innerHTML = character
+            }
+        }
+        
+        
+
+   </script>
+</body>
+</html>
