@@ -1,0 +1,5 @@
+.env
+node_modules/
+task1/.env
+task1/node_modules/
+task1/test.js
