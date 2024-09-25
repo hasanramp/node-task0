@@ -1,0 +1,19 @@
+{
+  "name": "task2",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "second task of unicode backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hasan Rampurawala",
+  "license": "ISC",
+  "dependencies": {
+    "connect-busboy": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.4",
+    "stream": "^0.0.3"
+  }
+}
