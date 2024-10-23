@@ -6,6 +6,9 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const app = express();
+const password = process.env.PASSWORD
+const dbURI = `mongodb+srv://node_project_user:${password}@cluster0.fszmfbt.mongodb.net/credentials?retryWrites=true&w=majority&appName=Cluster0`
+mongoose.connect(dbURI)
 
 app.listen(8000);
 
